@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Information</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><h4>First Name</h4></td>
+            <td><h4 th:text="${user.getFirst_name()}"></h4></td>
+        </tr>
+        <tr>
+            <td><h4>Last Name</h4></td>
+            <td><h4 th:text="${user.getLast_name()}"></h4></td>
+        </tr>
+        <tr>
+            <td><h4>Email</h4></td>
+            <td><h4 th:text="${user.getEmail()}"></h4></td>
+        </tr>
+        <tr>
+            <td><h4>Gender</h4></td>
+            <td><h4 th:text="${user.getGender()}"></h4></td>
+        </tr>
+        <tr>
+            <td><h4>Password</h4></td>
+            <td><h4 th:text="${user.getPassword()}"></h4></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Page</title>
+    <link rel="stylesheet" href="sign-up.css">
+    <style>
+        ::placeholder {
+            color: grey;
+        }
+        html {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            padding-top: 5vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: auto;
+            border-radius:0 60px;
+            padding:5px 20px;
+            width: 500px;
+            box-shadow: 13px 13px 20px #cbced1,
+            -13px -13px 20px #ffffff;
+            background: #ecf0f3;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            color: #555;
+            outline: none;
+            font-size: 15px;
+            margin-top:10px;
+        }
+        /* ============================================================================= */
+        .logo {
+            background:rgba(0, 0, 0, 0) url("/images/java-logo.png") no-repeat center center;
+            width:100px;
+            height: 100px;
+            border-radius: 50%;
+            margin:0 auto;
+            box-shadow:
+                /* logo shadow */
+                    0px 0px 2px #5f5f5f,
+                        /* offset */
+                    0px 0px 0px 5px #ecf0f3,
+                        /*bottom right */
+                    8px 8px 15px #a7aaaf,
+                        /* top left */
+                    -8px -8px 15px #ffffff
+        ;
+            object-fit: contain;
+            background-size: contain;
+            overflow: hidden;
+        }
+        .name{
+            display:flex;
+            justify-content: space-between;
+        }
+        .lastName{
+            margin-left: 10px;
+        }
+        .fas{
+            color:grey;
+            margin-left: 15px;
+            margin-right: 10px;
+        }
+        .fa-eye{
+            margin-left:200px;
+        }
+        .fields input {
+            border: none;
+            outline:none;
+            background: none;
+            font-size: 18px;
+            color: #555;
+            padding:8px 10px 8px 5px;
+        }
+        .username, .password, .email, .firstName, .lastName {
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: inset 8px 8px 8px #cbced1,
+            inset -8px -8px 8px #ffffff;
+        }
+        .lastName, .firstName {
+            display: flex;
+            align-items: center;
+        }
+        .fields {
+            width: 100%;
+            /* padding: 35px 5px 5px 5px; */
+        }
+        .fields .password{
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .accept-box {
+            display: flex;
+            align-items: center;
+            margin: auto;
+            font-size: 15px;
+        }
+        a {
+            color: white;
+        }
+        a:hover {
+            color: grey
+        }
+        .form-btns {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+        .form-btns button {
+            margin: auto;
+            font-size: 20px;
+            padding: 8px;
+            width: 280px;
+            height:60px;
+            border: none;
+            border-radius: 0 30px;
+            cursor: pointer;
+            color: white;
+            background-image: linear-gradient(90deg , #0c8ea8 50%, #2fdbb6  100%);
+        }
+        .form-btns button:disabled {
+            /* cursor: not-allowed; */
+            /* opacity: 0.7; */
+            background-image: linear-gradient(90deg , #0c8ea8 50%, #2fdbb6  100%) !important;
+            color:rgba(255,255,255,0.5) !important;
+        }
+        .form-btns button:hover {
+            background-image: linear-gradient(90deg , #0c8ea8 50%, #2fdbb6  100%) !important;
+            color:rgb(255,255,255) !important;
+            transition: all 1s ease-in-out;
+        }
+        .options {
+            padding-top: 15px;
+            margin: auto;
+            font-size: 13px;
+        }
+        p {
+            font-size: 12px;
+        }
+        select {
+            cursor: pointer;
+            margin-left: 25px;
+            display: inline-block;
+            position: relative;
+            font-size: 16px;
+            width: 240px;
+            padding-left: 20px;
+            padding-right: 20px;
+            font-size: 18px;
+            border: 1px solid silver;
+            border-radius: 4px;
+        }
+        select option {
+            padding-right: 20px;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            z-index: 999;
+            margin: 0;
+            /* padding: 0; */
+            list-style: none;
+            background-color:white;
+        }
+        .login-here{
+            color: rgb(15, 119, 93);
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <h2>Sign Up</h2>
+    <div  class="logo"></div>
+    <br>
+    <form action="saveUser" method="post">
+        <div class="fields name">
+            <div class="firstName"><i class="fas fa-user"></i> <input type="text" name="first_name" id="firstName" placeholder="First Name" required></div>
+            <div class="lastName"><i class="fas fa-user"></i><input type="text" name="last_name" id="lastName" placeholder="Last Name" required></div>
+        </div>
+        <div class="fields email"><i class="fas fa-envelope"></i><input type="email" name="email" id="email" placeholder="Email" required></div>
+        <div class="fields">
+            <div class="password"><i class="fas fa-lock"></i><input type="password" name="password" id="password" placeholder="Enter password"required><i class="fas fa-eye"></i></div>
+            <div class="password"><i class="fas fa-lock"></i><input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required></div>
+        </div>
+        <div class="fields name">
+            <div class="firstName"><i class="fas fa-calendar"></i><input class="date" placeholder="enter BirthDay" type="date" name="date_of_birth" pattern=" enter BirthDay \d{4}-\d{2}-\d{2}" required>                    </div>
+            <!-- <div class="lastName"><i class="fas fa-user"></i><input type="text" name="lastName" id="lastName" placeholder="Last Name"></div> -->
+            <select class="lastName" id="year" name="gender"required>
+                <option value="0">Gender Option</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
+            </select>
+        </div>
+        <div class="form-btns">
+            <button class="signup" type="submit">Sign Up</button>
+            <div class="options">
+                Already hav an account? <a class="login-here" href="login.html">Login here</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
