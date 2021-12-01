@@ -1,19 +1,18 @@
 package com.example.mediaclone.Controller;
 
 import com.example.mediaclone.Models.UserDetails;
-import com.example.mediaclone.Services.ServiceImpl.UserServiceImplementation;
+import com.example.mediaclone.Services.ServiceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
-    private UserServiceImplementation userServiceImplementation;
+    private UserServiceImpl userServiceImplementation;
 
     @Autowired
-    public UserController(UserServiceImplementation userServiceImplementation) {
+    public UserController(UserServiceImpl userServiceImplementation) {
         this.userServiceImplementation = userServiceImplementation;
     }
 
@@ -53,6 +52,7 @@ public class UserController {
         System.out.println("Login request: " + userDetails);
         UserDetails authenticated = userServiceImplementation.authenticate(userDetails.getEmail(), userDetails.getPassword());
         if(authenticated != null) {
+            System.out.println("LoggedIn User: " + authenticated);
             model.addAttribute("userLogin", authenticated.getFirst_name() + " " + authenticated.getLast_name());
             return "home_page";
         } else {

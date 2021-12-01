@@ -2,19 +2,17 @@ package com.example.mediaclone.Services.ServiceImpl;
 
 import com.example.mediaclone.Models.UserDetails;
 import com.example.mediaclone.Repository.UserRepository;
-import com.example.mediaclone.Services.Service;
+import com.example.mediaclone.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.FluentQuery;
 
 import java.util.List;
-import java.util.Optional;
 
 @org.springframework.stereotype.Service
-public class UserServiceImplementation implements Service {
+public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
