@@ -25,15 +25,17 @@ public class UserServiceImplementation implements Service {
 
     @Override
     public UserDetails saveUser(UserDetails userDetails) {
+        if(userRepository.findFirstByEmail(userDetails.getEmail()).isPresent()) {
+            System.out.println("Duplicate email registration");
+            return null;
+        }
         return userRepository.save(userDetails);
     }
 
-//    public Optional<UserDetails> loginUser(UserDetails user) {
-//        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
-//    }
-
-    public Optional<UserDetails> getUserByEmail(String email) {
-        userRepository.findByEmail(email);
-        return Optional.of(new UserDetails());
+    @Override
+    public UserDetails authenticate(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password)
+                .orElse(null);
     }
+
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Page</title>
+    <link rel="stylesheet" href="css/sign_up.css">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <h2>Sign Up</h2>
+    <div  class="logo"></div>
+    <br>
+    <form method="post" action="/register" th:object="${registerRequest}">
+        <div class="fields name">
+            <div class="firstName"><i class="fas fa-user"></i> <input type="text" name="first_name" id="firstName" placeholder="First Name" required></div>
+            <div class="lastName"><i class="fas fa-user"></i><input type="text" name="last_name" id="lastName" placeholder="Last Name" required></div>
+        </div>
+        <div class="fields email"><i class="fas fa-envelope"></i><input type="email" name="email" id="email" placeholder="Email" required></div>
+        <div class="fields">
+            <div class="password"><i class="fas fa-lock"></i><input type="password" name="password" id="password" placeholder="Enter password"required><i class="fas fa-eye"></i></div>
+            <div class="password"><i class="fas fa-lock"></i><input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required></div>
+        </div>
+        <div class="fields name">
+            <div class="firstName"><i class="fas fa-calendar"></i><input class="date" placeholder="enter BirthDay" type="date" name="date_of_birth" pattern=" enter BirthDay \d{4}-\d{2}-\d{2}" required>                    </div>
+            <!-- <div class="lastName"><i class="fas fa-user"></i><input type="text" name="lastName" id="lastName" placeholder="Last Name"></div> -->
+            <select class="lastName" id="year" name="gender"required>
+                <option value="0">Gender Option</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
+            </select>
+        </div>
+        <div class="form-btns">
+            <button class="signup" type="submit">Sign Up</button>
+            <div class="options">
+                Already hav an account? <a class="login-here" href="/login">Login here</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

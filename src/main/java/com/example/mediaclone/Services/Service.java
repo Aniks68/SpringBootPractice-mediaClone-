@@ -8,4 +8,6 @@ public interface Service {
     List<UserDetails> findAllUsers();
 
     UserDetails saveUser(UserDetails userDetails);
+
+    UserDetails authenticate(String login, String password);
 }
