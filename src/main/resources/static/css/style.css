@@ -18,9 +18,11 @@ body::before {
     opacity: 0.8;
 }
 .homepage {
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-template-rows: 40% 20% 40%;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    /*grid-template-columns: 30% 30% 30%;*/
+    /*grid-template-rows: 40% 20% 40%;*/
 }
 
 .homepage .content-home{

@@ -18,13 +18,13 @@ public class UserController {
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
-        model.addAttribute("registerRequest", new UserDetails());
+//        model.addAttribute("registerRequest", new UserDetails());
         return "register_page";
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        model.addAttribute("loginRequest", new UserDetails());
+//        model.addAttribute("loginRequest", new UserDetails());
         return "login_page";
     }
 
