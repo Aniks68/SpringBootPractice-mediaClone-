@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
     private UserServiceImpl userServiceImplementation;
@@ -48,13 +50,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute UserDetails userDetails, Model model) {
+    public String login(@ModelAttribute UserDetails userDetails, Model model, HttpSession session) {
         System.out.println("Login request: " + userDetails);
         UserDetails authenticated = userServiceImplementation.authenticate(userDetails.getEmail(), userDetails.getPassword());
         if(authenticated != null) {
             System.out.println("LoggedIn User: " + authenticated);
+            session.setAttribute("user", authenticated);
+            System.out.println("Session created for user_id: " + authenticated.getId() + ". Name: " + authenticated.getFirst_name() + " " + authenticated.getLast_name());
             model.addAttribute("userLogin", authenticated.getFirst_name() + " " + authenticated.getLast_name());
-            return "home_page";
+            return "/dashboard";
         } else {
             String message = "Incorrect login details. Wrong email or password. ";
             model.addAttribute("errorMessage", message);

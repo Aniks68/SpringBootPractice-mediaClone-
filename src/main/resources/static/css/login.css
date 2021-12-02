@@ -21,7 +21,7 @@
   }
   .logo {
     /* background:url("/images/java-logo.png")no-repeat center fixed; */
-    background:rgba(0, 0, 0, 0) url("/static/images/java-logo.png") no-repeat center center;
+    background:rgba(0, 0, 0, 0) url("/images/java-logo.png") no-repeat center center;
     width:100px;
     height: 100px;
     border-radius: 50%;

@@ -17,6 +17,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String title;
     private String content;
     @CreatedDate
     @Column(name = "dateCreated", nullable = false, updatable = false)
