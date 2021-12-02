@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(uniqueConstraints = @UniqueConstraint(name = "email", columnNames = {}))
 public class UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String first_name;
