@@ -54,8 +54,8 @@
             <i class="fa fa-bell"></i>
         </a>
 
-        <a href="#">
-            <i class="fas fa-ellipsis-h"></i>
+        <a href="/logout">
+            <i class="fas fa-ellipsis-h">Logout</i>
         </a>
     </div>
 </nav>
@@ -204,25 +204,24 @@
 
 
 
-        <div class="post created-post">
+        <div class="post created-post" th:each="post: ${posts}">
 
             <div class="post-top">
                 <div class="dp">
                     <img src="./images/girl.jpg" alt="">
                 </div>
                 <div class="post-info">
-                    <p class="name">Stella Ajiboye</p>
-                    <span class="time">12 hrs ago</span>
+                    <p class="name"><span th:text="${post.getUser().getFirst_name()}"></span> <span th:text="${post.getUser().getLast_name()}"></span></p>
+                    <span class="time"><span th:text="${post.getDateCreated()}"></span> </span>
                 </div>
                 <i class="fas fa-ellipsis-h"></i>
             </div>
 
             <div class="post-content">
-                <div></div>
 
-                <div class="title"><h4> </h4>  </div>
+                <div class="title"><h3> <span th:text="${post.getTitle()}"></span></h3>  </div>
 
-              <div class="post-body"> <p></p>😏</div>
+              <div class="post-body"> <p><span th:text="${post.getContent()}"></span></p></div>
                 <div>
                     <img src="" alt="" />
 
@@ -244,13 +243,9 @@
 
                 </div>
                 <div class="action" id= "deleter">
-                    <a style="text-decoration: none; color: grey;" href=""> <i class="fa fa-trash"></i> Delete</a>
+                    <a style="text-decoration: none; color: grey;" href="#" th:href="${'delete/' + post.getId()}"> <i class="fa fa-trash"></i> Delete</a>
                 </div>
-
             </div>
-
-
-
         </div>
 
 
@@ -310,14 +305,14 @@
                 <div class="dp">
                     <img src="./images/logo.png" alt="">
                 </div>
-                <p class="name">Cody</p>
+                <p class="name">Java Stack</p>
             </a>
 
             <a class='page' href="#">
                 <div class="dp">
                     <img src="./images/dp.jpg" alt="">
                 </div>
-                <p class="name">Cody Tutorials</p>
+                <p class="name">Java Tutorials</p>
             </a>
         </div>
 

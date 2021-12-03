@@ -29,4 +29,19 @@ public class UserDetails {
     @Column(nullable = false)
     private String gender;
 
+    public String formatString(String name) {
+        String raw = name;
+        String[] rawArr = raw.split("");
+        String finAns = "";
+
+        for (int i = 0; i < 1; i++) {
+            StringBuilder sb = new StringBuilder(rawArr[i]);
+            rawArr[i] = String.valueOf(sb).toUpperCase();
+        }
+
+        for(String el : rawArr) {
+            finAns+=el;
+        }
+        return finAns.trim();
+    }
 }
