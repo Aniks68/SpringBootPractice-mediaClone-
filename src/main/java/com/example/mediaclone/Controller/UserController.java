@@ -65,7 +65,6 @@ public class UserController implements ErrorController {
         if(authenticated != null) {
             System.out.println("LoggedIn User: " + authenticated);
             session.setAttribute("user", authenticated);
-            System.out.println("Session created for user_id: " + authenticated.getId() + ". Name: " + authenticated.getFirst_name() + " " + authenticated.getLast_name());
             model.addAttribute("userLogin", authenticated.getFirst_name() + " " + authenticated.getLast_name());
 
             postServiceImpl.viewDashboard(model2);

@@ -3,6 +3,7 @@ package com.example.mediaclone.Controller;
 import com.example.mediaclone.Models.Comment;
 import com.example.mediaclone.Models.Post;
 import com.example.mediaclone.Models.UserDetails;
+import com.example.mediaclone.Services.ServiceImpl.CommentServiceImpl;
 import com.example.mediaclone.Services.ServiceImpl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,22 +15,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class PostController {
     private PostServiceImpl postServiceImpl;
+    private CommentServiceImpl commentServiceImpl;
 
     @Autowired
-    public PostController(PostServiceImpl postServiceImpl) {
+    public PostController(PostServiceImpl postServiceImpl, CommentServiceImpl commentServiceImpl) {
         this.postServiceImpl = postServiceImpl;
+        this.commentServiceImpl = commentServiceImpl;
     }
 
     @GetMapping("/post")
-    public String getPostPage(HttpSession session) {
-        UserDetails user = (UserDetails) session.getAttribute("user");
-        System.out.println("Session user is " + user.getFirst_name() + " " + user.getLast_name());
-
-//        Post post = postServiceImpl.getPostById(13L);
-//        Post post2 = postServiceImpl.getPostById(14L);
-//        postServiceImpl.deletePost(post);
-//        postServiceImpl.deletePost(post2);
-
+    public String getPostPage() {
         return "post_page";
     }
 
@@ -43,10 +38,8 @@ public class PostController {
         newPost.setContent(post.getContent());
         postServiceImpl.addPost(newPost);
 
-        System.out.println("Post of id: " + newPost.getId() + ". Created by " + user.getFirst_name() + " " + user.getLast_name());
-
         postServiceImpl.viewDashboard(model);
-        return "/dashboard";
+        return "dashboard";
     }
 
     @GetMapping("/delete/{postId}")
@@ -59,7 +52,6 @@ public class PostController {
 
         if(validCreator) {
             postServiceImpl.deletePost(post);
-            System.out.println("Post was deleted by " + user.getFirst_name());
         }
 
         postServiceImpl.viewDashboard(model);
@@ -83,12 +75,13 @@ public class PostController {
                              Model model, @RequestParam(value = "content") String content) {
         UserDetails user = (UserDetails) session.getAttribute("user");
         Post post = postServiceImpl.getPostById(Long.parseLong(id));
+
+        // check if current user is also the post's owner
         boolean validCreator = post.getUser().equals(user);
 
         if(validCreator) {
-            String message = "Edited!";
             post.setContent(content);
-            post.setEditNotice(message);
+            post.setEditNotice("Edited!");
             postServiceImpl.addPost(post);
             System.out.println("Post was edited");
         }
@@ -98,16 +91,4 @@ public class PostController {
     }
 
 
-
-//    @PostMapping("/updatePost/{postId}")
-//    public String updatePost(HttpSession session, @PathVariable String postId, @RequestParam(value = "content") String content) {
-//        User user = (User)session.getAttribute("user");
-//        Post thePost = postService.getPostById(Long.parseLong(postId));
-//
-//        thePost.setContent(content);
-//        thePost.setUser(user);
-//        postService.addPost(thePost);
-//        return "redirect:/home";
-//
-//    }
 }

@@ -37,14 +37,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Iterable<Post> getPosts() {
+    public List<Post> getPosts() {
         return postRepository.findAll();
     }
 
     public void viewDashboard(Model model){
         Post post = new Post();
         Comment comment = new Comment();
-        Iterable<Post> posts = this.getPosts();
+        List<Post> posts = this.getPosts();
         /* add posts to the model */
         model.addAttribute("posts", posts);
         model.addAttribute("post", post);

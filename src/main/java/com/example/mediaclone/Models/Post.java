@@ -27,6 +27,8 @@ public class Post {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserDetails user;
     private String editNotice;
+
+
 //
 //    public int compareTo(Post otherPost) {
 //

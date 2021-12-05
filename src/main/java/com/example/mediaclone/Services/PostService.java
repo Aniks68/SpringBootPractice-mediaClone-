@@ -2,12 +2,14 @@ package com.example.mediaclone.Services;
 
 import com.example.mediaclone.Models.Post;
 
+import java.util.List;
+
 public interface PostService {
-    public void addPost(Post post);
+    void addPost(Post post);
 
-    public void deletePost(Post post);
+    void deletePost(Post post);
 
-    public Post getPostById(Long id);
+    Post getPostById(Long id);
 
-    public Iterable<Post> getPosts();
+    List<Post> getPosts();
 }
