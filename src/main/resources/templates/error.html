@@ -16,7 +16,7 @@
     <h1 t="404">404</h1>
     <div class="bottom">
       <p><span th:text="${errorMessage}"></span></p>
-      <a href="/">Return to welcome page</a>
+      <a href='#' th:href="${errorLink}"><span th:text="${errorNotice}"></span></a>
     </div>
   </div>
 </section>

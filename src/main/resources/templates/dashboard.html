@@ -26,7 +26,7 @@
 <nav>
     <div class="nav-left">
         <img src="./images/logo.png" alt="Logo">
-        <input type="text" placeholder="Search Mediabook..">
+        <input type="text" placeholder="Search Media-Book...">
     </div>
 
     <div class="nav-middle">
@@ -219,9 +219,11 @@
 
             <div class="post-content">
 
-                <div class="title"><h3> <span th:text="${post.getTitle()}"></span></h3>  </div>
+                <div class="title"><h2> <span th:text="${post.getTitle()}"></span></h2>  </div>
 
-              <div class="post-body"> <p><span th:text="${post.getContent()}"></span></p></div>
+                <div class="post-body"> <p><h3><span th:text="${post.getContent()}"></span></p> </h3></div>
+
+                <div class="post-body"> <p><h5><span th:text="${post.getEditNotice()}"></span></p> </h5></div>
                 <div>
                     <img src="" alt="" />
 
@@ -239,11 +241,11 @@
                     <span>Comment</span>
                 </div>
                 <div class="action" id="edit-comment">
-                    <a  style="text-decoration: none; color:grey;" href="#"><i class="fa fa-edit"></i> Edit</a>
+                    <a  style="text-decoration: none; color:grey;" th:href="@{/showPostEditForm/{id}(id=${post.getId()})}"><i class="fa fa-edit"></i> Edit</a>
 
                 </div>
                 <div class="action" id= "deleter">
-                    <a style="text-decoration: none; color: grey;" href="#" th:href="${'delete/' + post.getId()}"> <i class="fa fa-trash"></i> Delete</a>
+                    <a style="text-decoration: none; color: grey;" th:href="${'delete/' + post.getId()}"> <i class="fa fa-trash"></i> Delete</a>
                 </div>
             </div>
         </div>
@@ -251,34 +253,66 @@
 
 
         <div class="comment-container">
-     
+
+            <form action="" method="">
+                <textarea class="comment-text" name = "content" placeholder='Edit Your post'></textarea>
+
+                <div class="btn-mother">
+
+
+
+                    <div class="action-btns" id="like-comment">
+                        <button class="comment-btn" href="#"><i class="far fa-thumbs-up"></i> like</button>
+                    </div>
+                    <div class="action-btns">
+                        <button class="comment-btn" href="#" th:href="${'update/' + post.getId()}"><i class="fa fa-file"></i> post</button>
+
+                    </div>
+                    <div class="action-btns">
+                        <button class="comment-btn" href="#"><i class="fa fa-edit"></i> Edit</button>
+
+                    </div>
+                    <div class="action-btns">
+                        <button class="comment-btn"  href=""> <i class="fa fa-trash"></i> Delete</button>
+                    </div>
+
+
+
+
+
+
+                    <!-- <input type="submit" value='Comment'>
+                    <button id='clear' href='#'>Cancel</button> -->
+                </div>
+            </form>
+
             <form action="" method="">
              <textarea class="comment-text" placeholder='Add Your Comment'></textarea>
-    
+
               <div class="btn-mother">
-    
-    
-    
+
+
+
                 <div class="action-btns" id="like-comment">
                     <button class="comment-btn" href="#"><i class="far fa-thumbs-up"></i> like</button>
                 </div>
                 <div class="action-btns">
                     <button class="comment-btn" href="#"><i class="fa fa-file"></i> post</button>
-    
+
                 </div>
                 <div class="action-btns">
                     <button class="comment-btn" href="#"><i class="fa fa-edit"></i> Edit</button>
-    
+
                 </div>
                 <div class="action-btns">
                     <button class="comment-btn"  href=""> <i class="fa fa-trash"></i> Delete</button>
                 </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
                 <!-- <input type="submit" value='Comment'>
                 <button id='clear' href='#'>Cancel</button> -->
               </div>

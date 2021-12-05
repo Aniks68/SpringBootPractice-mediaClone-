@@ -26,4 +26,16 @@ public class Post {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserDetails user;
+    private String editNotice;
+//
+//    public int compareTo(Post otherPost) {
+//
+//        if(getId() < otherPost.getId()){
+//            return -1;
+//        }
+//        else if(getId() > otherPost.getId()){
+//            return 1;
+//        }
+//        return 0;
+//    }
 }

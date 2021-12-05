@@ -1,11 +1,10 @@
 package com.example.mediaclone.Controller;
 
-import com.example.mediaclone.Models.Comment;
-import com.example.mediaclone.Models.Post;
 import com.example.mediaclone.Models.UserDetails;
 import com.example.mediaclone.Services.ServiceImpl.PostServiceImpl;
 import com.example.mediaclone.Services.ServiceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class UserController {
+public class UserController implements ErrorController {
     private UserServiceImpl userServiceImplementation;
     private PostServiceImpl postServiceImpl;
 
@@ -46,12 +45,17 @@ public class UserController {
         user.setDate_of_birth(userDetails.getDate_of_birth());
 
         System.out.println("Register request: " + userDetails);
+
+
         UserDetails registeredUser = userServiceImplementation.saveUser(user);
+
         System.out.println("Registered: " + registeredUser);
         String message = "Duplicate email registration attempt. ";
         model.addAttribute("errorMessage", message);
+        model.addAttribute("errorNotice", "RETURN TO REGISTRATION PAGE");
+        model.addAttribute("errorLink", "/register");
 
-        return registeredUser == null ? "error_page" : "login_page";
+        return registeredUser == null ? "error" : "login_page";
     }
 
     @PostMapping("/login")
@@ -69,8 +73,16 @@ public class UserController {
         } else {
             String message = "Incorrect login details. Wrong email or password. ";
             model.addAttribute("errorMessage", message);
-            return "error_page";
+            model.addAttribute("errorNotice", "RETURN TO LOGIN PAGE");
+            model.addAttribute("errorLink", "/login");
+            return "error";
         }
+    }
+
+    @GetMapping("/dashboard")
+    public String getDashBoard(Model model) {
+        postServiceImpl.viewDashboard(model);
+        return "dashboard";
     }
 
     @GetMapping("/logout")
@@ -78,5 +90,14 @@ public class UserController {
         session.invalidate();
         System.out.println("Session has ended");
         return "login_page";
+    }
+
+    @RequestMapping("/error")
+    public String getDefaultError(Model model) {
+        String message = "You have entered a wrong URL";
+        model.addAttribute("errorMessage", message);
+        model.addAttribute("errorNotice", "RETURN TO DASHBOARD PAGE");
+        model.addAttribute("errorLink", "/dashboard");
+        return "error";
     }
 }

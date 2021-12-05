@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.*;
+import java.util.function.Predicate;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -47,4 +50,20 @@ public class PostServiceImpl implements PostService {
         model.addAttribute("post", post);
         model.addAttribute("comment", comment);
     }
+//
+//    private void extracted(Iterable<Post> posts) {
+//        posts.forEach(x-> recentPosts().add(x));
+//    }
+//
+//    public static Queue<Post> recentPosts() {
+//        return postPriorityQueue;
+//    }
+//
+//    private static Queue<Post> postPriorityQueue = new PriorityQueue<>(((o1, o2) -> {
+//        final int post1Priority = Math.toIntExact(o1.getId());
+//        final int post2Priority = Math.toIntExact(o2.getId());
+//
+//        return Integer.compare(post1Priority, post2Priority);
+//    }));
 }
+

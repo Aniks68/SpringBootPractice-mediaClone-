@@ -306,10 +306,34 @@ nav .nav-right a > i{
 }
 
 .post .post-content{
-    font-size:16px;
-    font-weight:normal;
+    /*font-size:16px;*/
+    /*font-weight:normal;*/
     padding:10px;
 }
+
+.post .post-content h2 {
+    font-size: 24px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.post .post-content h3 {
+    font-weight: normal;
+    font-size: 19px;
+}
+
+.post .post-content h5 {
+    font-size: 12px;
+    font-weight: lighter;
+}
+/*.post .post-content post-body h3 {*/
+/*    font-size: 23px;*/
+/*    font-weight: bolder;*/
+/*}*/
+/*.post .post-content post-body h5 {*/
+/*    font-size: 18px;*/
+/*    font-weight: 100;*/
+/*}*/
 
 .post .post-content > img{
     width:100%;

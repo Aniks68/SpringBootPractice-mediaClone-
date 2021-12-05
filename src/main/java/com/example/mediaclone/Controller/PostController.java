@@ -7,10 +7,7 @@ import com.example.mediaclone.Services.ServiceImpl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,7 +34,7 @@ public class PostController {
     }
 
     @PostMapping("/addPost")
-    public String addPost(@ModelAttribute Post post, HttpSession session, Model model, Model model2) {
+    public String addPost(@ModelAttribute Post post, HttpSession session, Model model) {
         UserDetails user = (UserDetails) session.getAttribute("user");
         Post newPost = new Post();
 
@@ -46,12 +43,9 @@ public class PostController {
         newPost.setContent(post.getContent());
         postServiceImpl.addPost(newPost);
 
-        model.addAttribute("postUser", newPost.getUser().getFirst_name() + " " + newPost.getUser().getLast_name());
-        model.addAttribute("postTitle", newPost.getTitle());
-        model.addAttribute("postContent", newPost.getContent());
         System.out.println("Post of id: " + newPost.getId() + ". Created by " + user.getFirst_name() + " " + user.getLast_name());
 
-        postServiceImpl.viewDashboard(model2);
+        postServiceImpl.viewDashboard(model);
         return "/dashboard";
     }
 
@@ -59,15 +53,61 @@ public class PostController {
     public String deletePost(@PathVariable String postId, HttpSession session, Model model) {
         UserDetails user = (UserDetails) session.getAttribute("user");
         Post post = postServiceImpl.getPostById(Long.parseLong(postId));
+
+        // check if current user is owner of post
         boolean validCreator = post.getUser().equals(user);
 
         if(validCreator) {
             postServiceImpl.deletePost(post);
             System.out.println("Post was deleted by " + user.getFirst_name());
-        } else {
-            String message = "You can't delete this post!";
-            model.addAttribute("errorMessage", message);
         }
-        return validCreator == true ? "/dashboard" : "/error_page";
+
+        postServiceImpl.viewDashboard(model);
+        return "dashboard";
     }
+
+    @GetMapping("/showPostEditForm/{id}")
+    public String showPostEditForm(@PathVariable (value = "id") Long id, Model model) {
+        // get post from posts
+        Post post = postServiceImpl.getPostById(id);
+
+        // set post as model attribute to pre-populate the form
+        model.addAttribute("post", post);
+
+
+        return "post_edit_page";
+    }
+
+    @PostMapping("/updatePost/{id}")
+    public String updatePost(@PathVariable String id, HttpSession session,
+                             Model model, @RequestParam(value = "content") String content) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        Post post = postServiceImpl.getPostById(Long.parseLong(id));
+        boolean validCreator = post.getUser().equals(user);
+
+        if(validCreator) {
+            String message = "Edited!";
+            post.setContent(content);
+            post.setEditNotice(message);
+            postServiceImpl.addPost(post);
+            System.out.println("Post was edited");
+        }
+
+        postServiceImpl.viewDashboard(model);
+        return "dashboard";
+    }
+
+
+
+//    @PostMapping("/updatePost/{postId}")
+//    public String updatePost(HttpSession session, @PathVariable String postId, @RequestParam(value = "content") String content) {
+//        User user = (User)session.getAttribute("user");
+//        Post thePost = postService.getPostById(Long.parseLong(postId));
+//
+//        thePost.setContent(content);
+//        thePost.setUser(user);
+//        postService.addPost(thePost);
+//        return "redirect:/home";
+//
+//    }
 }
