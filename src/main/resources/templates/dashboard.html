@@ -251,26 +251,26 @@
 
 <!--            Post's comment section      -->
 
-            <div class="post created-post" th:each="post: ${posts}">
+            <div class="post created-post" th:each="comment: ${comments}">
 
                 <div class="post-top">
                     <div class="dp">
                         <img src="./images/girl.jpg" alt="">
                     </div>
                     <div class="post-info">
-                        <p class="name"><span th:text="${post.getUser().getFirst_name()}"></span> <span th:text="${post.getUser().getLast_name()}"></span></p>
-                        <span class="time"><span th:text="${post.getDateCreated()}"></span> </span>
+                        <p class="name"><span th:text="${comment.getUser().getFirst_name()}"></span> <span th:text="${comment.getUser().getLast_name()}"></span></p>
+                        <span class="time"><span th:text="${comment.getDateCreated()}"></span> </span>
                     </div>
                     <i class="fas fa-ellipsis-h"></i>
                 </div>
 
                 <div class="post-content">
 
-                    <div class="title"><h2> <span th:text="${post.getTitle()}"></span></h2>  </div>
+<!--                    <div class="title"><h2> <span th:text="${post.getTitle()}"></span></h2>  </div>-->
 
-                    <div class="post-body"> <p><h3><span th:text="${post.getContent()}"></span></p> </h3></div>
+                    <div class="post-body"> <p><h3><span th:text="${comment.getContent()}"></span></p> </h3></div>
 
-                    <div class="post-body"> <p><h5><span th:text="${post.getEditNotice()}"></span></p> </h5></div>
+                    <div class="post-body"> <p><h5><span th:text="${comment.getEditNotice()}"></span></p> </h5></div>
                     <div>
                         <img src="" alt="" />
 

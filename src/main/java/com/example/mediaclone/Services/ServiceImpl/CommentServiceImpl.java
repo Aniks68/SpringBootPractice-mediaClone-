@@ -6,6 +6,8 @@ import com.example.mediaclone.Services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
     final
@@ -18,5 +20,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addComment(Comment comment) {
         commentRepository.save(comment);
+    }
+
+    @Override
+    public List<Comment> getComments() {
+        return commentRepository.findAll();
     }
 }

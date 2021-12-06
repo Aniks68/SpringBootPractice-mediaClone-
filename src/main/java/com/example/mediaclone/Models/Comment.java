@@ -29,4 +29,5 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "postId", referencedColumnName = "id")
     private Post post;
+    private String editNotice;
 }
