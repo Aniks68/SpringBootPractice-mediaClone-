@@ -64,4 +64,32 @@ public class CommentController {
         postServiceImpl.viewDashboard(model);
         return "dashboard";
     }
+
+    @GetMapping("/editCommentForm/{id}")
+    public String showComEditForm(@PathVariable (value = "id") Long id, Model model) {
+        // get comment from comments
+        Comment comment = commentServiceImpl.getComment(id);
+
+        // set comment as model attribute to pre-populate the form
+        model.addAttribute("comment", comment);
+        return "comment_edit_page";
+    }
+
+    @PostMapping("/updateComment/{id}")
+    public String updateComment(@PathVariable String id, HttpSession session, Model model, @RequestParam(value = "content") String content) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        Comment comment = commentServiceImpl.getComment(Long.parseLong(id));
+
+        boolean validCreator = comment.getUser().equals(user);
+
+        if(validCreator) {
+            comment.setContent(content);
+            comment.setEditNotice("Edited");
+            commentServiceImpl.addComment(comment);
+            System.out.println("Comment was edited");
+        }
+
+        postServiceImpl.viewDashboard(model);
+        return "dashboard";
+    }
 }
