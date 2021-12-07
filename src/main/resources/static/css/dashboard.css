@@ -362,6 +362,25 @@ nav .nav-right a > i{
     color:#d74;
 }
 
+/*  post's comment section begins   */
+
+.showComment{
+    display:block;
+}
+.like-color i{
+    color:rgb(0, 183, 255);
+}
+.comment{
+    display: flex;
+    flex-direction: column;
+}
+.test{
+    display: flex;
+    flex-direction: column;
+}
+
+/*  post's comment section ends     */
+
 .container .right-panel{
     padding:1rem;
 }

@@ -89,6 +89,4 @@ public class PostController {
         postServiceImpl.viewDashboard(model);
         return "dashboard";
     }
-
-
 }
