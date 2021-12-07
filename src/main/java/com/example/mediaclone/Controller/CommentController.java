@@ -7,10 +7,7 @@ import com.example.mediaclone.Services.ServiceImpl.CommentServiceImpl;
 import com.example.mediaclone.Services.ServiceImpl.PostServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -47,6 +44,22 @@ public class CommentController {
         commentServiceImpl.addComment(newComment);
         System.out.println("Comment of id: " + newComment.getId() + ". Commented by " + newComment.getUser().getFirst_name()
                 + " " + newComment.getUser().getLast_name() + ". For post by: " +newComment.getPost().getUser().getFirst_name());
+
+        postServiceImpl.viewDashboard(model);
+        return "dashboard";
+    }
+
+    @GetMapping("/deleteComment/{commentId}")
+    public String deletePost(@PathVariable String commentId, HttpSession session, Model model) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        Comment comment = commentServiceImpl.getComment(Long.parseLong(commentId));
+
+        // check if current user is owner of post
+        boolean validCreator = comment.getUser().equals(user);
+
+        if(validCreator) {
+            commentServiceImpl.deleteComment(comment);
+        }
 
         postServiceImpl.viewDashboard(model);
         return "dashboard";

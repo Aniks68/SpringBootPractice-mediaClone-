@@ -23,6 +23,16 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment getComment(Long id) {
+        return commentRepository.findCommentById(id);
+    }
+
+    @Override
+    public void deleteComment(Comment comment) {
+        commentRepository.delete(comment);
+    }
+
+    @Override
     public List<Comment> getComments() {
         return commentRepository.findAll();
     }
