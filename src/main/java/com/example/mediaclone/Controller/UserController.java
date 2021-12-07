@@ -79,15 +79,19 @@ public class UserController implements ErrorController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashBoard(Model model) {
+    public String getDashBoard(Model model, HttpSession session, Model model1) {
+        boolean validSession = session.getAttribute("user") == null;
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        model1.addAttribute("errorMessage", "Invalid session.");
+        model1.addAttribute("errorNotice", "RETURN TO LOGIN PAGE");
+        model1.addAttribute("errorLink", "/login");
+
+        return validSession ? "error" : "dashboard";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        System.out.println("Session has ended");
         return "login_page";
     }
 
