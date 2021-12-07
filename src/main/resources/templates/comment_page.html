@@ -219,11 +219,11 @@
                         <input type="hidden" name="user_id" value="" >
                         <!-- <textarea name="text" class="title-text" placeholder="What's on your mind, JavaDevs?"  spellcheck="false" type="text"  value=""  required></textarea> -->
 
-                        <input class="title-text" type="text"  spellcheck="false" th:field="*{content}" disabled>
+                        <textarea class="title-text" type="text"  spellcheck="false" th:field="*{content}" disabled></textarea>
 
                     </div>
                 </div>
-                <textarea class="body-text" name="content" spellcheck="false" type="text"  value=""  required></textarea>
+                <textarea class="body-text" name="content" spellcheck="true" type="text"  value=""  required></textarea>
 
 
 

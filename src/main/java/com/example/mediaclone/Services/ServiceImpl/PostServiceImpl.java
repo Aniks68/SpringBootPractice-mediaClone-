@@ -44,6 +44,8 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         Comment comment = new Comment();
         List<Post> posts = this.getPosts();
+        Collections.reverse(posts);
+
         List<Comment> comments = commentService.getComments();
         /* add posts to the model */
         model.addAttribute("posts", posts);
@@ -51,20 +53,5 @@ public class PostServiceImpl implements PostService {
         model.addAttribute("comments", comments);
         model.addAttribute("comment", comment);
     }
-//
-//    private void extracted(Iterable<Post> posts) {
-//        posts.forEach(x-> recentPosts().add(x));
-//    }
-//
-//    public static Queue<Post> recentPosts() {
-//        return postPriorityQueue;
-//    }
-//
-//    private static Queue<Post> postPriorityQueue = new PriorityQueue<>(((o1, o2) -> {
-//        final int post1Priority = Math.toIntExact(o1.getId());
-//        final int post2Priority = Math.toIntExact(o2.getId());
-//
-//        return Integer.compare(post1Priority, post2Priority);
-//    }));
 }
 
