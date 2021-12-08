@@ -120,7 +120,7 @@ a:hover {
     border-radius: 0 30px;
     cursor: pointer;
     color: white;
-    background-image: linear-gradient(90deg , #0c8ea8 50%, #2fdbb6  100%);
+    background-image: linear-gradient(90deg , royalblue 50%, teal  100%);
 }
 .form-btns button:disabled {
     /* cursor: not-allowed; */

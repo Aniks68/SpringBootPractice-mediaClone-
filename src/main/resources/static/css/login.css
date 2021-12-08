@@ -96,7 +96,7 @@
     color:#fff;
     text-align: center;
 
-    background-image: linear-gradient(90deg , #0c8ea8 50%, #2fdbb6  100%);
+    background-image: linear-gradient(90deg , royalblue 50%, teal  100%);
     box-shadow: 3px 3px 8px #b1b1b1,
                 -3px -3px 8px #ffffff;
     transition:all 2s ease-in-out;

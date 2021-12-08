@@ -39,7 +39,7 @@ public class PostController {
         postServiceImpl.addPost(newPost);
 
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/delete/{postId}")
@@ -55,7 +55,7 @@ public class PostController {
         }
 
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/showPostEditForm/{id}")
@@ -87,6 +87,6 @@ public class PostController {
         }
 
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }
