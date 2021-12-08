@@ -68,7 +68,7 @@ public class UserController implements ErrorController {
             model.addAttribute("userLogin", authenticated.getFirst_name() + " " + authenticated.getLast_name());
 
             postServiceImpl.viewDashboard(model2);
-            return "/dashboard";
+            return "redirect:/dashboard";
         } else {
             String message = "Incorrect login details. Wrong email or password. ";
             model.addAttribute("errorMessage", message);

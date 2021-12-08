@@ -46,7 +46,7 @@ public class CommentController {
                 + " " + newComment.getUser().getLast_name() + ". For post by: " +newComment.getPost().getUser().getFirst_name());
 
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/deleteComment/{commentId}")
@@ -90,6 +90,6 @@ public class CommentController {
         }
 
         postServiceImpl.viewDashboard(model);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }
