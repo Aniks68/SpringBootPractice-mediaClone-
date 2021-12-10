@@ -1,3 +1,4 @@
+//like on post
 function like(postId, userId){
     console.log("working", postId, userId);
     const URL = "/processLike";

@@ -10,8 +10,7 @@ import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    final
-    CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
     public CommentServiceImpl(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;

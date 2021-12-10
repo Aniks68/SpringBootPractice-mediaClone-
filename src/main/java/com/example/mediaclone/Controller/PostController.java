@@ -1,9 +1,10 @@
 package com.example.mediaclone.Controller;
 
-import com.example.mediaclone.Models.Comment;
 import com.example.mediaclone.Models.Post;
+import com.example.mediaclone.Models.PostLike;
 import com.example.mediaclone.Models.UserDetails;
 import com.example.mediaclone.Services.ServiceImpl.CommentServiceImpl;
+import com.example.mediaclone.Services.ServiceImpl.PostLikeServiceImpl;
 import com.example.mediaclone.Services.ServiceImpl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,14 @@ import javax.servlet.http.HttpSession;
 public class PostController {
     private PostServiceImpl postServiceImpl;
     private CommentServiceImpl commentServiceImpl;
+    private PostLikeServiceImpl postLikeServiceImpl;
+
 
     @Autowired
-    public PostController(PostServiceImpl postServiceImpl, CommentServiceImpl commentServiceImpl) {
+    public PostController(PostServiceImpl postServiceImpl, CommentServiceImpl commentServiceImpl, PostLikeServiceImpl postLikeServiceImpl) {
         this.postServiceImpl = postServiceImpl;
         this.commentServiceImpl = commentServiceImpl;
+        this.postLikeServiceImpl = postLikeServiceImpl;
     }
 
     @GetMapping("/post")
@@ -87,6 +91,25 @@ public class PostController {
         }
 
         postServiceImpl.viewDashboard(model);
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/like/{id}")
+    public String likeIndex(@PathVariable("id") Long id, HttpSession session, PostLike like, Model model) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if( user == null) return "redirect:/login";
+
+        Post post = postServiceImpl.getPostById(id);
+        PostLike postLike = postLikeServiceImpl.getPostLikeByPostAndUser(post, user);
+
+        like.setPost(post);
+        like.setUser(user);
+
+        if(postLike == null) {
+            postLikeServiceImpl.addLike(like);
+        } else {
+            postLikeServiceImpl.delete(postLike);
+        }
         return "redirect:/dashboard";
     }
 }
