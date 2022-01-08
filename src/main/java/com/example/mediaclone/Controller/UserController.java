@@ -48,7 +48,6 @@ public class UserController implements ErrorController {
 
 
         UserDetails registeredUser = userServiceImplementation.saveUser(user);
-
         System.out.println("Registered: " + registeredUser);
         String message = "Duplicate email registration attempt. ";
         model.addAttribute("errorMessage", message);

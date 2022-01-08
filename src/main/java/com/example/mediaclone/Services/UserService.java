@@ -10,4 +10,5 @@ public interface UserService {
     UserDetails saveUser(UserDetails userDetails);
 
     UserDetails authenticate(String login, String password);
+
 }

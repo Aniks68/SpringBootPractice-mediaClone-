@@ -35,5 +35,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmailAndPassword(email, password)
                 .orElse(null);
     }
-
 }
